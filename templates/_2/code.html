@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Retail Calculator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script content="tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'primary': '#0056b2', 'background-light': '#f5f7f8', 'background-dark': '#0f1923' }, fontFamily: { 'display': ['Inter'] }, borderRadius: { 'DEFAULT': '0.5rem', 'lg': '0.75rem', 'xl': '1rem', 'full': '9999px' } } } }" id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0056b2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">storefront</span>
+<h1 class="text-lg font-bold tracking-tight">Retail POS</h1>
+</div>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">history</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col max-w-md mx-auto w-full">
+<!-- Display Section (Top Heavy for Visibility) -->
+<section class="p-4 space-y-4"><!-- Tax & Discount Summary Area -->
+<div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-4">
+<button class="flex-1 py-2 text-sm font-bold rounded-lg bg-white dark:bg-slate-700 shadow-sm text-primary">税抜表示</button>
+<button class="flex-1 py-2 text-sm font-bold text-slate-500">税込表示</button>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-200 dark:border-slate-800 space-y-3">
+<div class="flex justify-between items-center text-slate-500">
+<span class="text-xs font-medium uppercase tracking-wider">参考価格 (税抜)</span>
+<span class="text-base font-semibold text-slate-900 dark:text-white">¥1,000</span>
+</div>
+<div class="flex justify-between items-center text-slate-500">
+<span class="text-xs font-medium uppercase tracking-wider">消費税 (10%)</span>
+<span class="text-base font-semibold">+¥100</span>
+</div>
+<div class="flex justify-between items-center text-blue-600 dark:text-blue-400">
+<span class="text-xs font-medium uppercase tracking-wider">割引額 (10%)</span>
+<span class="text-base font-semibold">-¥110</span>
+</div>
+<div class="pt-3 border-t border-dashed border-slate-200 dark:border-slate-700 flex justify-between items-end">
+<span class="text-sm font-bold text-slate-500 pb-1">最終合計 (税込)</span>
+<span class="text-4xl font-black text-primary">¥990</span>
+</div>
+</div></section>
+<!-- Control Section (Middle) -->
+<section class="px-4 py-2 space-y-4">
+<!-- Tax & Discount Controls -->
+<div class="space-y-3">
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 text-sm font-bold rounded-xl bg-primary text-white shadow-md">10%</button>
+<button class="flex-1 py-2.5 text-sm font-bold rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600">8% (軽減)</button>
+</div>
+<div class="grid grid-cols-5 gap-2">
+<button class="py-2 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600">5%</button>
+<button class="py-2 text-xs font-bold border border-blue-200 dark:border-blue-700 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600">10%</button>
+<button class="py-2 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600">15%</button>
+<button class="py-2 text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-600">30%</button>
+<div class="relative flex items-center">
+<input class="w-full py-2 px-1 text-center text-xs font-bold border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900 focus:ring-primary focus:border-primary" placeholder="%" type="text"/>
+</div>
+</div>
+</div>
+<!-- Main Input Display (Calculator Style) -->
+<div class="mt-4 flex flex-col items-end justify-end px-2">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">入力金額</span>
+<div class="text-6xl font-light tracking-tighter text-slate-900 dark:text-white">
+      1,000
+    </div>
+</div>
+</section>
+<!-- Numeric Keypad (Lower Section for One-Handed Use) -->
+<section class="mt-auto p-6 bg-white dark:bg-black rounded-t-[40px] border-t border-slate-200 dark:border-slate-800"><div class="grid grid-cols-4 gap-4 max-w-[340px] mx-auto"><!-- Row 1 -->
+<button class="aspect-square bg-[#A5A5A5] text-black text-2xl font-medium rounded-full flex items-center justify-center active:opacity-70 transition-opacity"><span class="material-symbols-outlined">backspace</span></button>
+<button class="aspect-square bg-[#A5A5A5] text-black text-2xl font-medium rounded-full flex items-center justify-center active:opacity-70 transition-opacity">C</button>
+<button class="aspect-square bg-[#A5A5A5] text-black text-2xl font-medium rounded-full flex items-center justify-center active:opacity-70 transition-opacity">%</button>
+<button class="aspect-square bg-primary text-white text-2xl font-medium rounded-full flex items-center justify-center active:opacity-70 transition-opacity">÷</button>
+<!-- Row 2 -->
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">7</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">8</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">9</button>
+<button class="aspect-square bg-primary text-white text-3xl font-normal rounded-full flex items-center justify-center active:opacity-70 transition-opacity">×</button>
+<!-- Row 3 -->
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">4</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">5</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">6</button>
+<button class="aspect-square bg-primary text-white text-3xl font-normal rounded-full flex items-center justify-center active:opacity-70 transition-opacity">-</button>
+<!-- Row 4 -->
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">1</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">2</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">3</button>
+<button class="aspect-square bg-primary text-white text-3xl font-normal rounded-full flex items-center justify-center active:opacity-70 transition-opacity">+</button>
+<!-- Row 5 (Modified) -->
+<button class="col-span-2 h-auto aspect-[2/1] bg-[#333333] text-white text-3xl font-normal rounded-full px-8 flex items-center justify-start active:bg-slate-600 transition-colors">0</button>
+<button class="aspect-square bg-[#333333] text-white text-3xl font-normal rounded-full flex items-center justify-center active:bg-slate-600 transition-colors">.</button>
+<button class="aspect-square bg-primary text-white text-3xl font-normal rounded-full flex items-center justify-center active:opacity-70 transition-opacity">=</button></div>
+</section>
+</main>
+<!-- Navigation Bar -->
+<nav class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pb-safe">
+<div class="flex h-16">
+<a class="flex-1 flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined text-[28px]">calculate</span>
+<span class="text-[10px] font-medium mt-1">電卓</span>
+</a>
+<a class="flex-1 flex flex-col items-center justify-center text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined text-[28px]">receipt_long</span>
+<span class="text-[10px] font-medium mt-1">履歴</span>
+</a>
+<a class="flex-1 flex flex-col items-center justify-center text-slate-500 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined text-[28px]">settings</span>
+<span class="text-[10px] font-medium mt-1">設定</span>
+</a>
+</div>
+</nav>
+</body></html>

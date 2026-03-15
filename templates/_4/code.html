@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0056b2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>設定 - Retail Calc</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-xl">
+<!-- Header -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 border-b border-slate-200 dark:border-slate-800 justify-between">
+<div class="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">設定</h1>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Section: Tax Configuration -->
+<section class="mt-4">
+<h2 class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider px-4 pb-2">税設定</h2>
+<div class="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">percent</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">標準税率</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">標準的な消費税率を設定します</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-slate-900 dark:text-slate-100 font-medium">10%</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 mx-4"></div>
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">shopping_basket</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">軽減税率</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">食料品などの税率を設定します</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-slate-900 dark:text-slate-100 font-medium">8%</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Custom Discounts -->
+<section class="mt-6">
+<h2 class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider px-4 pb-2">割引設定</h2>
+<div class="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">sell</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">カスタム割引</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">よく使う割引率を登録します</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Section: App Preferences -->
+<section class="mt-6">
+<h2 class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider px-4 pb-2">アプリ設定</h2>
+<div class="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4 px-4 min-h-[64px] py-2">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">ダークモード</p>
+</div>
+<div class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary cursor-pointer">
+<span class="inline-block h-4 w-4 transform translate-x-6 rounded-full bg-white transition"></span>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 mx-4"></div>
+<div class="flex items-center gap-4 px-4 min-h-[64px] py-2">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-10">
+<span class="material-symbols-outlined">volume_up</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">操作音</p>
+</div>
+<div class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 dark:bg-slate-700 cursor-pointer">
+<span class="inline-block h-4 w-4 transform translate-x-1 rounded-full bg-white transition"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Support & Info -->
+<section class="mt-6">
+<h2 class="text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider px-4 pb-2">サポートと情報</h2>
+<div class="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4 px-4 min-h-[56px] py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-slate-400 flex items-center justify-center shrink-0 size-10">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">アプリ情報</p>
+</div>
+<p class="text-slate-400 text-sm">v2.4.0</p>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 mx-4"></div>
+<div class="flex items-center gap-4 px-4 min-h-[56px] py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-slate-400 flex items-center justify-center shrink-0 size-10">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">利用規約</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 mx-4"></div>
+<div class="flex items-center gap-4 px-4 min-h-[56px] py-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="text-slate-400 flex items-center justify-center shrink-0 size-10">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium">プライバシーポリシー</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+</div>
+</section>
+<div class="mt-8 mb-4 text-center">
+<p class="text-slate-400 text-xs">© 2024 Retail Calc Pro</p>
+</div>
+</div>
+<!-- Bottom NavBar -->
+<div class="fixed bottom-0 left-0 right-0 mx-auto max-w-md bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex justify-around items-center px-4 py-3">
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<p class="text-[10px] font-medium leading-none">電卓</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<p class="text-[10px] font-medium leading-none">履歴</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-[1]">settings</span>
+<p class="text-[10px] font-medium leading-none">設定</p>
+</a>
+</div>
+</div>
+</body></html>
