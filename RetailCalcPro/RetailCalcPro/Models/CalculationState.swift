@@ -32,7 +32,6 @@ final class CalculationState {
             if digit == "0" || digit == "00" { return }
             inputText = digit
         } else {
-            // 最大10桁制限（99億9999万9999円）
             let newText = inputText + digit
             if newText.count <= 10 {
                 inputText = newText
@@ -60,21 +59,16 @@ final class CalculationState {
         reset()
     }
 
-    func addDiscount(_ discount: DiscountType) {
-        appliedDiscounts.append(discount)
-    }
+    // MARK: - 割引（単一適用のみ）
 
-    func removeLastDiscount() {
-        if !appliedDiscounts.isEmpty {
-            appliedDiscounts.removeLast()
-        }
+    func setDiscount(_ discount: DiscountType) {
+        appliedDiscounts = [discount]
     }
 
     func clearDiscounts() {
         appliedDiscounts = []
     }
 
-    /// 履歴から状態を復元
     func restore(from history: CalculationHistory) {
         inputText = String(history.inputPrice)
         taxRate = history.taxRate

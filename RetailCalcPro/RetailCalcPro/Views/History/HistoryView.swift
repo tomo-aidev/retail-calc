@@ -10,14 +10,20 @@ struct HistoryView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            header
+            if !histories.isEmpty {
+                HStack {
+                    Spacer()
+                    Button("すべて削除") {
+                        showDeleteConfirmation = true
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.red)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+            }
 
-            // Filter tabs
-            filterTabs
-
-            // History list
-            if filteredHistories.isEmpty {
+            if histories.isEmpty {
                 emptyState
             } else {
                 historyList
@@ -34,95 +40,24 @@ struct HistoryView: View {
         }
     }
 
-    private var filteredHistories: [CalculationHistory] {
-        viewModel.filteredHistory(histories)
-    }
-
-    // MARK: - Header
-
-    private var header: some View {
-        HStack {
-            Text("履歴")
-                .font(.title2.weight(.bold))
-            Spacer()
-            if !histories.isEmpty {
-                Button("すべて削除") {
-                    showDeleteConfirmation = true
-                }
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(AppTheme.primary)
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(Color(.systemBackground).opacity(0.8))
-    }
-
-    // MARK: - Filter Tabs
-
-    private var filterTabs: some View {
-        HStack(spacing: 8) {
-            ForEach(HistoryViewModel.FilterType.allCases, id: \.self) { filter in
-                Button {
-                    viewModel.selectedFilter = filter
-                } label: {
-                    Text(filter.rawValue)
-                        .font(.caption.weight(.medium))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .background(
-                            viewModel.selectedFilter == filter
-                                ? AppTheme.primary
-                                : Color(.systemGray5)
-                        )
-                        .foregroundStyle(
-                            viewModel.selectedFilter == filter
-                                ? .white
-                                : .secondary
-                        )
-                        .clipShape(Capsule())
-                }
-            }
-            Spacer()
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(Color(.systemGray6).opacity(0.5))
-    }
-
-    // MARK: - History List
-
     private var historyList: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                ForEach(filteredHistories) { history in
-                    HistoryItemRow(history: history, viewModel: viewModel)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            onRestore?(history)
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                viewModel.deleteHistory(history, context: modelContext)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                        }
-
-                    Divider()
-                        .padding(.leading, 80)
+        List {
+            ForEach(histories) { history in
+                HistoryItemRow(history: history, viewModel: viewModel)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onRestore?(history)
+                    }
+                    .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            }
+            .onDelete { indexSet in
+                for index in indexSet {
+                    viewModel.deleteHistory(histories[index], context: modelContext)
                 }
             }
-
-            // End of list
-            Text("これより前の履歴はありません")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.vertical, 32)
         }
+        .listStyle(.plain)
     }
-
-    // MARK: - Empty State
 
     private var emptyState: some View {
         VStack(spacing: 16) {

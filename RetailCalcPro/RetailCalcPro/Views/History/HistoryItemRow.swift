@@ -4,79 +4,62 @@ struct HistoryItemRow: View {
     let history: CalculationHistory
     let viewModel: HistoryViewModel
 
-    private var iconName: String {
-        switch history.category {
-        case .taxOnly: return "doc.text"
-        case .discountOnly: return "tag"
-        case .both: return "tag"
-        case .none: return "cart"
+    /// 税込 or 税抜 ラベル
+    private var methodLabel: String {
+        switch history.taxMethod {
+        case .exclusive: return "税込"
+        case .inclusive: return "税抜"
         }
     }
 
-    private var badgeColor: Color {
-        switch history.category {
-        case .taxOnly: return .green
-        case .discountOnly: return .red
-        case .both: return .orange
-        case .none: return .gray
-        }
+    /// 割引ラベル（例: "割引(10%)"）
+    private var discountLabel: String? {
+        guard let discount = history.discounts.first else { return nil }
+        return "割引(\(discount.shortLabel))"
+    }
+
+    /// 時刻フォーマット（HH:mm）
+    private var timeString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: history.createdAt)
     }
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Icon
-            ZStack {
-                RoundedRectangle(cornerRadius: 14)
-                    .fill(AppTheme.primary.opacity(0.1))
-                    .frame(width: 48, height: 48)
-                Image(systemName: iconName)
-                    .foregroundStyle(AppTheme.primary)
-                    .font(.title3)
+        VStack(alignment: .leading, spacing: 4) {
+            // 1行目: 入力：¥1,700                    20:47
+            HStack {
+                Text("入力：\(history.inputPrice.yenFormatted)")
+                    .font(.body.weight(.bold))
+                Spacer()
+                Text(timeString)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
 
-            // Content
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(history.finalPrice.yenFormatted)
-                        .font(.body.weight(.bold))
-                    Spacer()
-                    Text(viewModel.relativeDate(for: history.createdAt))
-                        .font(.caption2.weight(.medium))
-                        .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
-                        .tracking(1)
-                }
+            // 2行目: 税込：¥1,309 消費税(10%) +¥119 割引(10%):-¥510
+            HStack(spacing: 4) {
+                Text("\(methodLabel)：\(history.finalPrice.yenFormatted)")
+                    .font(.subheadline.weight(.bold))
 
-                Text("元値: \(history.inputPrice.yenFormatted)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-
-                HStack(spacing: 8) {
-                    Text(history.categoryLabel)
-                        .font(.caption2.weight(.medium))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 3)
-                        .background(badgeColor.opacity(0.1))
-                        .foregroundStyle(badgeColor)
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 6)
-                                .stroke(badgeColor.opacity(0.2), lineWidth: 1)
-                        )
-
-                    Text(viewModel.fullDate(for: history.createdAt))
+                if history.taxAmount > 0 {
+                    Text("消費税(\(history.taxRate.label))")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
-                        .italic()
+                    Text("+\(history.taxAmount.yenFormatted)")
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(AppTheme.exclusivePrimary)
                 }
-            }
 
-            // Chevron
-            Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundStyle(Color(.systemGray3))
+                if let discountLabel, history.totalDiscount > 0 {
+                    Text("\(discountLabel):-\(history.totalDiscount.yenFormatted)")
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(.orange)
+                }
+
+                Spacer()
+            }
         }
-        .padding(16)
-        .background(Color(.systemBackground))
+        .padding(.vertical, 4)
     }
 }

@@ -19,16 +19,8 @@ final class AppSettings: Sendable {
         didSet { UserDefaults.standard.set(darkModeEnabled, forKey: "darkModeEnabled") }
     }
 
-    var soundEnabled: Bool {
-        didSet { UserDefaults.standard.set(soundEnabled, forKey: "soundEnabled") }
-    }
-
     var customDiscountPercentages: [Int] {
         didSet { UserDefaults.standard.set(customDiscountPercentages, forKey: "customDiscountPercentages") }
-    }
-
-    var customDiscountAmounts: [Int] {
-        didSet { UserDefaults.standard.set(customDiscountAmounts, forKey: "customDiscountAmounts") }
     }
 
     var standardTaxRateValue: Int {
@@ -58,15 +50,8 @@ final class AppSettings: Sendable {
             ? defaults.bool(forKey: "darkModeEnabled")
             : false
 
-        self.soundEnabled = defaults.object(forKey: "soundEnabled") != nil
-            ? defaults.bool(forKey: "soundEnabled")
-            : true
-
         let savedPercentages = defaults.array(forKey: "customDiscountPercentages") as? [Int]
-        self.customDiscountPercentages = savedPercentages ?? [5, 10, 15, 30]
-
-        let savedAmounts = defaults.array(forKey: "customDiscountAmounts") as? [Int]
-        self.customDiscountAmounts = savedAmounts ?? [100, 200, 500, 1000]
+        self.customDiscountPercentages = savedPercentages ?? [5, 10, 15, 20, 30, 40, 50, 60, 70]
 
         self.standardTaxRateValue = defaults.object(forKey: "standardTaxRateValue") != nil
             ? defaults.integer(forKey: "standardTaxRateValue")

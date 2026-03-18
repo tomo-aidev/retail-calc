@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04EAF1FEC5C5331EB072EFD0 /* UsageLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCFF6988031C8735D089CD /* UsageLimiter.swift */; };
+		0FF07C5E28CA2C0B971EB5E9 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCF351074F0CA8C1EC3E6E /* TermsOfServiceView.swift */; };
+		1994CBB97C040F63A0A1B752 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E65E62B0B28A40F63E0C /* PrivacyPolicyView.swift */; };
 		1F8138542B1BBFC049752437 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5254B53C594997DBB7A6A /* HistoryView.swift */; };
 		1FAA7ABD4B90DF66890AFDF9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156246E10B492568BE6E7DBD /* SplashView.swift */; };
 		3110F9DFAA1710794979F47C /* TaxCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257417A22C9DAF89B03043C /* TaxCalculatorTests.swift */; };
@@ -27,9 +30,11 @@
 		DD2CC546E971BB89FF7856B0 /* TaxDiscountControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2A4693BEFF18CD0FB45D98 /* TaxDiscountControl.swift */; };
 		DECE83FD0C3C3CD88D9136EC /* NumericKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3411C4DD92EFA9F666821823 /* NumericKeypad.swift */; };
 		E3FF0F30B2949FC2B7817256 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303D8CD819E377036F203FCE /* MainTabView.swift */; };
+		E8E090863893D0414D9BF3D1 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941EAACECFD75BD8886D50 /* PurchaseManager.swift */; };
 		EB0E5AC359266E2664338891 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F6E8DCD0D597A40ABA6027 /* CalculatorView.swift */; };
 		F5CA78A7C6C606217ADA6EC5 /* DisplaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7328BDE02C6DB8D02B4FA451 /* DisplaySection.swift */; };
 		FC316B641117CF565EF2FFB1 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184716A50E4F0FD430B818F6 /* AppTheme.swift */; };
+		FC85993B90AD3F01347EF761 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC013306DAF1144EFB28685 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,14 +64,20 @@
 		50614389328D572D20B2359D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5257417A22C9DAF89B03043C /* TaxCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxCalculatorTests.swift; sourceTree = "<group>"; };
 		7328BDE02C6DB8D02B4FA451 /* DisplaySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySection.swift; sourceTree = "<group>"; };
+		80DB7AA7EE8475B7BC9A4E98 /* RetailCalcPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RetailCalcPro.entitlements; sourceTree = "<group>"; };
 		88D68A381D5F45BC84413EC1 /* TaxCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxCalculator.swift; sourceTree = "<group>"; };
 		8AC1A81332817625BDB6BC4E /* NumberFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Ext.swift"; sourceTree = "<group>"; };
 		8AC29330808F034A14568138 /* CalculationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationState.swift; sourceTree = "<group>"; };
 		91EE4A08D53B660032331A3A /* RetailCalcProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetailCalcProApp.swift; sourceTree = "<group>"; };
 		9ED59081210868DAD7099A93 /* TaxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxType.swift; sourceTree = "<group>"; };
 		B4A05A0C8EB084220DC8E15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8F1E65E62B0B28A40F63E0C /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		C4F6E8DCD0D597A40ABA6027 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		D3DCF351074F0CA8C1EC3E6E /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		E6C5254B53C594997DBB7A6A /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		ECC013306DAF1144EFB28685 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		F7CCFF6988031C8735D089CD /* UsageLimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageLimiter.swift; sourceTree = "<group>"; };
+		F9941EAACECFD75BD8886D50 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		F9FD6DC2FEB0FCE1E8A38547 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				8AC1A81332817625BDB6BC4E /* NumberFormatter+Ext.swift */,
+				F9941EAACECFD75BD8886D50 /* PurchaseManager.swift */,
 				88D68A381D5F45BC84413EC1 /* TaxCalculator.swift */,
+				F7CCFF6988031C8735D089CD /* UsageLimiter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -105,7 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				457E77DA6355AA03F35EA99A /* CustomDiscountEditor.swift */,
+				B8F1E65E62B0B28A40F63E0C /* PrivacyPolicyView.swift */,
 				50614389328D572D20B2359D /* SettingsView.swift */,
+				D3DCF351074F0CA8C1EC3E6E /* TermsOfServiceView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -123,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				B4A05A0C8EB084220DC8E15F /* Assets.xcassets */,
+				80DB7AA7EE8475B7BC9A4E98 /* RetailCalcPro.entitlements */,
 				91EE4A08D53B660032331A3A /* RetailCalcProApp.swift */,
 				A0A79956FA8B88E28A3C1265 /* Models */,
 				8A08696AAF1BFCFC10E7465C /* Theme */,
@@ -173,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				303D8CD819E377036F203FCE /* MainTabView.swift */,
+				ECC013306DAF1144EFB28685 /* PaywallView.swift */,
 				156246E10B492568BE6E7DBD /* SplashView.swift */,
 				1DBE3616C3FE24449695F161 /* Calculator */,
 				B154FC148420AD8829829FEB /* History */,
@@ -239,6 +256,7 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					16463BE1E8C2AE740BC505CC = {
+						DevelopmentTeam = QCT6H2SS5N;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -301,6 +319,9 @@
 				E3FF0F30B2949FC2B7817256 /* MainTabView.swift in Sources */,
 				B2427D86B1691C173009036B /* NumberFormatter+Ext.swift in Sources */,
 				DECE83FD0C3C3CD88D9136EC /* NumericKeypad.swift in Sources */,
+				FC85993B90AD3F01347EF761 /* PaywallView.swift in Sources */,
+				1994CBB97C040F63A0A1B752 /* PrivacyPolicyView.swift in Sources */,
+				E8E090863893D0414D9BF3D1 /* PurchaseManager.swift in Sources */,
 				3A4C3A13C8550360FB0EA5AF /* RetailCalcProApp.swift in Sources */,
 				82E69F20EA22078516D68408 /* SettingsView.swift in Sources */,
 				967288A866117A38F2F06DAD /* SettingsViewModel.swift in Sources */,
@@ -308,6 +329,8 @@
 				A583C6F4003AA5D53CB0F41C /* TaxCalculator.swift in Sources */,
 				DD2CC546E971BB89FF7856B0 /* TaxDiscountControl.swift in Sources */,
 				7C61D5CFCF72A8DE986FA9EF /* TaxType.swift in Sources */,
+				0FF07C5E28CA2C0B971EB5E9 /* TermsOfServiceView.swift in Sources */,
+				04EAF1FEC5C5331EB072EFD0 /* UsageLimiter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,9 +442,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RetailCalcPro/RetailCalcPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QCT6H2SS5N;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "消費税電卓・割引計算";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -443,9 +469,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RetailCalcPro/RetailCalcPro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QCT6H2SS5N;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "消費税電卓・割引計算";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

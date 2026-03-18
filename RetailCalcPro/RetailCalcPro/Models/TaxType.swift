@@ -3,11 +3,13 @@ import Foundation
 enum TaxRate: Int, CaseIterable, Codable {
     case standard = 10
     case reduced = 8
+    case none = 0
 
     var label: String {
         switch self {
         case .standard: return "10%"
-        case .reduced: return "8% (軽減)"
+        case .reduced: return "8%(軽減)"
+        case .none: return "0%"
         }
     }
 

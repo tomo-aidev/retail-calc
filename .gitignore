@@ -32,3 +32,14 @@ Pods/
 # IDE
 .idea/
 .vscode/
+
+# Android
+android/keystore/
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+
+# Secrets
+*.jks
+*.keystore

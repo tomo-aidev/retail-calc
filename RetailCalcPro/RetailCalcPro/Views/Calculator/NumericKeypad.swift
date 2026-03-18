@@ -5,58 +5,55 @@ struct NumericKeypad: View {
     let onDoubleZero: () -> Void
     let onBackspace: () -> Void
     let onClear: () -> Void
-    let onEquals: () -> Void
+    let onSaveHistory: () -> Void
 
     var body: some View {
-        VStack(spacing: 14) {
-            // Row 1: Backspace, C, %, ÷
-            HStack(spacing: 14) {
-                KeypadButton(
-                    style: .function,
-                    action: onBackspace
-                ) {
+        VStack(spacing: 8) {
+            // Row 1: ⌫, C, 00
+            HStack(spacing: 8) {
+                KeypadButton(style: .function, action: onBackspace) {
                     Image(systemName: "delete.backward")
-                        .font(.title2)
+                        .font(.title2.weight(.medium))
                 }
                 KeypadButton(label: "C", style: .function, action: onClear)
-                KeypadButton(label: "00", style: .function) {
-                    onDoubleZero()
-                }
-                KeypadButton(label: "÷", style: .primary, action: {})
+                KeypadButton(label: "00", style: .function, action: onDoubleZero)
             }
 
-            // Row 2: 7, 8, 9, ×
-            HStack(spacing: 14) {
+            // Row 2: 7, 8, 9
+            HStack(spacing: 8) {
                 KeypadButton(label: "7", style: .digit) { onDigit("7") }
                 KeypadButton(label: "8", style: .digit) { onDigit("8") }
                 KeypadButton(label: "9", style: .digit) { onDigit("9") }
-                KeypadButton(label: "×", style: .primary, action: {})
             }
 
-            // Row 3: 4, 5, 6, -
-            HStack(spacing: 14) {
+            // Row 3: 4, 5, 6
+            HStack(spacing: 8) {
                 KeypadButton(label: "4", style: .digit) { onDigit("4") }
                 KeypadButton(label: "5", style: .digit) { onDigit("5") }
                 KeypadButton(label: "6", style: .digit) { onDigit("6") }
-                KeypadButton(label: "-", style: .primary, action: {})
             }
 
-            // Row 4: 1, 2, 3, +
-            HStack(spacing: 14) {
+            // Row 4: 1, 2, 3
+            HStack(spacing: 8) {
                 KeypadButton(label: "1", style: .digit) { onDigit("1") }
                 KeypadButton(label: "2", style: .digit) { onDigit("2") }
                 KeypadButton(label: "3", style: .digit) { onDigit("3") }
-                KeypadButton(label: "+", style: .primary, action: {})
             }
 
-            // Row 5: 0 (wide), ., =
-            HStack(spacing: 14) {
-                KeypadButton(label: "0", style: .digit, isWide: true) { onDigit("0") }
-                KeypadButton(label: ".", style: .digit, action: {})
-                KeypadButton(label: "=", style: .primary, action: onEquals)
+            // Row 5: 保存, 0, =
+            HStack(spacing: 8) {
+                KeypadButton(style: .function, action: onSaveHistory) {
+                    VStack(spacing: 2) {
+                        Image(systemName: "tray.and.arrow.down")
+                            .font(.body.weight(.medium))
+                        Text("保存")
+                            .font(.caption.weight(.bold))
+                    }
+                }
+                KeypadButton(label: "0", style: .digit) { onDigit("0") }
+                KeypadButton(label: "=", style: .primary, action: {})
             }
         }
-        .padding(.horizontal, 16)
     }
 }
 
@@ -66,24 +63,21 @@ struct KeypadButton<Content: View>: View {
     enum Style {
         case digit
         case function
-        case primary
+        case primary  // 青色
     }
 
     let style: Style
-    let isWide: Bool
     let action: () -> Void
     let content: Content
 
-    init(label: String, style: Style, isWide: Bool = false, action: @escaping () -> Void) where Content == Text {
+    init(label: String, style: Style, action: @escaping () -> Void) where Content == Text {
         self.style = style
-        self.isWide = isWide
         self.action = action
         self.content = Text(label)
     }
 
-    init(style: Style, isWide: Bool = false, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
+    init(style: Style, action: @escaping () -> Void, @ViewBuilder content: () -> Content) {
         self.style = style
-        self.isWide = isWide
         self.action = action
         self.content = content()
     }
@@ -92,7 +86,7 @@ struct KeypadButton<Content: View>: View {
         switch style {
         case .digit: return AppTheme.keypadDark
         case .function: return AppTheme.keypadGray
-        case .primary: return AppTheme.primary
+        case .primary: return AppTheme.exclusivePrimary
         }
     }
 
@@ -107,12 +101,11 @@ struct KeypadButton<Content: View>: View {
     var body: some View {
         Button(action: action) {
             content
-                .font(style == .function ? .title2.weight(.medium) : .title.weight(.regular))
+                .font(.title.weight(.medium))
                 .foregroundStyle(foregroundColor)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .aspectRatio(isWide ? 2.2 : 1.0, contentMode: .fit)
                 .background(backgroundColor)
-                .clipShape(Capsule())
+                .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .buttonStyle(KeypadButtonStyle())
     }
@@ -123,6 +116,6 @@ struct KeypadButtonStyle: ButtonStyle {
         configuration.label
             .opacity(configuration.isPressed ? 0.7 : 1.0)
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+            .animation(.easeInOut(duration: 0.08), value: configuration.isPressed)
     }
 }

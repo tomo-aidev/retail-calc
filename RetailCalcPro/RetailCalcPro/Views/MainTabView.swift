@@ -1,38 +1,44 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab = 0
     @State private var calculatorVM = CalculatorViewModel()
+    @State private var showHistory = false
+    @State private var showSettings = false
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            // Calculator Tab
-            CalculatorView(viewModel: calculatorVM)
-                .tabItem {
-                    Image(systemName: "plus.forwardslash.minus")
-                    Text("電卓")
+        CalculatorView(
+            viewModel: calculatorVM,
+            onShowHistory: { showHistory = true },
+            onShowSettings: { showSettings = true }
+        )
+        .sheet(isPresented: $showHistory) {
+            NavigationStack {
+                HistoryView { history in
+                    calculatorVM.restoreFromHistory(history)
+                    showHistory = false
                 }
-                .tag(0)
-
-            // History Tab
-            HistoryView { history in
-                calculatorVM.restoreFromHistory(history)
-                selectedTab = 0
-            }
-            .tabItem {
-                Image(systemName: "clock.arrow.circlepath")
-                Text("履歴")
-            }
-            .tag(1)
-
-            // Settings Tab
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gearshape")
-                    Text("設定")
+                .navigationTitle("履歴")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("閉じる") {
+                            showHistory = false
+                        }
+                    }
                 }
-                .tag(2)
+            }
         }
-        .tint(AppTheme.primary)
+        .sheet(isPresented: $showSettings) {
+            NavigationStack {
+                SettingsView()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button("閉じる") {
+                                showSettings = false
+                            }
+                        }
+                    }
+            }
+        }
     }
 }

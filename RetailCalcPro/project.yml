@@ -18,10 +18,14 @@ targets:
     platform: iOS
     sources:
       - RetailCalcPro
+    entitlements:
+      path: RetailCalcPro/RetailCalcPro.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.retailcalcpro.app
         GENERATE_INFOPLIST_FILE: "YES"
+        INFOPLIST_KEY_CFBundleDisplayName: "消費税電卓・割引計算"
+        CODE_SIGN_ENTITLEMENTS: RetailCalcPro/RetailCalcPro.entitlements
         INFOPLIST_KEY_UILaunchScreen_Generation: "YES"
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: "YES"
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
@@ -32,6 +36,7 @@ targets:
         SUPPORTS_MACCATALYST: false
         TARGETED_DEVICE_FAMILY: "1"
         CODE_SIGN_STYLE: "Automatic"
+        DEVELOPMENT_TEAM: "QCT6H2SS5N"
 
   RetailCalcProTests:
     type: bundle.unit-test

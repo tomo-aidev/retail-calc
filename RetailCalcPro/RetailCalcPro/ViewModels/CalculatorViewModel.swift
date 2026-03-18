@@ -1,15 +1,23 @@
 import Foundation
 import SwiftData
-import UIKit
 
 @MainActor
 @Observable
 final class CalculatorViewModel {
     var state = CalculationState()
-    var showDiscountPicker = false
-    var customDiscountText = ""
+    var showPaywallSheet = false
+    var showSavedFeedback = false
 
     private var modelContext: ModelContext?
+    private let usageLimiter = UsageLimiter.shared
+
+    var isLimitReached: Bool { usageLimiter.isLimitReached }
+    var showPaywall: Bool {
+        get { usageLimiter.showPaywall }
+        set { usageLimiter.showPaywall = newValue }
+    }
+    var remainingCount: Int { usageLimiter.remainingCount }
+    var todayUsageCount: Int { usageLimiter.todayUsageCount }
 
     func setModelContext(_ context: ModelContext) {
         self.modelContext = context
@@ -18,71 +26,69 @@ final class CalculatorViewModel {
     // MARK: - Keypad Actions
 
     func tapDigit(_ digit: String) {
-        triggerHaptic()
+        if state.inputPrice == 0 && digit != "0" {
+            guard usageLimiter.canUse() else {
+                showPaywallSheet = true
+                return
+            }
+        }
         state.appendDigit(digit)
     }
 
     func tapDoubleZero() {
-        triggerHaptic()
+        if state.inputPrice == 0 {
+            guard usageLimiter.canUse() else {
+                showPaywallSheet = true
+                return
+            }
+        }
         state.appendDoubleZero()
     }
 
     func tapBackspace() {
-        triggerHaptic()
         state.deleteLastDigit()
     }
 
     func tapClear() {
-        triggerHaptic()
         state.clear()
-    }
-
-    func tapAllClear() {
-        triggerHaptic()
-        state.clearAll()
+        usageLimiter.recordUsage()
     }
 
     // MARK: - Tax Actions
 
     func setTaxRate(_ rate: TaxRate) {
-        triggerHaptic()
         state.taxRate = rate
     }
 
     func setTaxMethod(_ method: TaxMethod) {
-        triggerHaptic()
         state.taxMethod = method
     }
 
     // MARK: - Discount Actions
 
     func applyPercentageDiscount(_ percentage: Int) {
-        triggerHaptic()
-        state.addDiscount(.percentage(percentage))
-    }
-
-    func applyAmountDiscount(_ amount: Int) {
-        triggerHaptic()
-        state.addDiscount(.amount(amount))
-    }
-
-    func applyCustomPercentageDiscount() {
-        guard let value = Int(customDiscountText), value > 0, value <= 100 else { return }
-        triggerHaptic()
-        state.addDiscount(.percentage(value))
-        customDiscountText = ""
+        state.setDiscount(.percentage(percentage))
     }
 
     func clearDiscounts() {
-        triggerHaptic()
         state.clearDiscounts()
     }
 
-    // MARK: - History
+    // MARK: - History（手動保存のみ）
 
     func saveToHistory() {
-        guard let modelContext, state.inputPrice > 0 else { return }
+        guard let modelContext, state.inputPrice > 0 else {
+            print("[Calculator] 保存スキップ: modelContext=\(modelContext != nil), inputPrice=\(state.inputPrice)")
+            return
+        }
         let result = state.result
+        print("[Calculator] 保存開始:")
+        print("  入力金額: ¥\(result.inputPrice)")
+        print("  割引額: ¥\(result.totalDiscount)")
+        print("  割引後: ¥\(result.priceAfterDiscount)")
+        print("  税額: ¥\(result.taxAmount) (\(result.taxRate.label), \(result.taxMethod == .exclusive ? "税抜" : "税込"))")
+        print("  最終金額: ¥\(result.finalPrice)")
+
         let history = CalculationHistory(
             inputPrice: result.inputPrice,
             finalPrice: result.finalPrice,
@@ -95,18 +101,11 @@ final class CalculatorViewModel {
         )
         modelContext.insert(history)
         try? modelContext.save()
+        showSavedFeedback = true
+        print("[Calculator] 履歴保存完了")
     }
 
     func restoreFromHistory(_ history: CalculationHistory) {
         state.restore(from: history)
-    }
-
-    // MARK: - Haptic Feedback
-
-    private func triggerHaptic() {
-        let settings = AppSettings.shared
-        guard settings.soundEnabled else { return }
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
     }
 }

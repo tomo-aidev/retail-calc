@@ -12,6 +12,9 @@ struct RetailCalcProApp: App {
                 MainTabView()
                     .opacity(showSplash ? 0 : 1)
                     .preferredColorScheme(settings.darkModeEnabled ? .dark : .light)
+                    .onAppear {
+                        PurchaseManager.shared.startObserving()
+                    }
 
                 if showSplash {
                     SplashView(showSplash: $showSplash)
